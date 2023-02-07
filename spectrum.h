@@ -1,23 +1,23 @@
 #pragma once
 
 /*
-Color definitions in ImGui are a good starting point, 
+Color definitions in ImGui are a good starting point,
 but do not cover all the intricacies of Spectrum's possible colors
-in controls and widgets. 
+in controls and widgets.
 
-One big difference is that ImGui communicates widget activity 
+One big difference is that ImGui communicates widget activity
 (hover, pressed) with their background, while spectrum uses a mix
 of background and border, with border being the most common choice.
 
-Because of this, we reference extra colors in spectrum from 
-imgui.cpp and imgui_widgets.cpp directly, and to make that work, 
-we need to have them defined at here at compile time. 
+Because of this, we reference extra colors in spectrum from
+imgui.cpp and imgui_widgets.cpp directly, and to make that work,
+we need to have them defined at here at compile time.
 */
 
 /// Pick one, or have one defined already.
 #if !defined(SPECTRUM_USE_LIGHT_THEME) && !defined(SPECTRUM_USE_DARK_THEME)
-#define SPECTRUM_USE_LIGHT_THEME
-//#define SPECTRUM_USE_DARK_THEME
+//#define SPECTRUM_USE_LIGHT_THEME
+#define SPECTRUM_USE_DARK_THEME
 #endif
 
 namespace ImGui {

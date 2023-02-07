@@ -9,10 +9,10 @@
 #include <tchar.h>
 
 // Data
-static ID3D11Device*            g_pd3dDevice = NULL;
-static ID3D11DeviceContext*     g_pd3dDeviceContext = NULL;
-static IDXGISwapChain*          g_pSwapChain = NULL;
-static ID3D11RenderTargetView*  g_mainRenderTargetView = NULL;
+static ID3D11Device* g_pd3dDevice = NULL;
+static ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
+static IDXGISwapChain* g_pSwapChain = NULL;
+static ID3D11RenderTargetView* g_mainRenderTargetView = NULL;
 
 // Forward declarations of helper functions
 bool CreateDeviceD3D(HWND hWnd);
@@ -60,6 +60,7 @@ int main(int, char**)
 
     // Setup Dear ImGui style
     ImGui::Spectrum::StyleColorsSpectrum();
+    ImGui::Spectrum::LoadFont();
     //ImGui::StyleColorsDark();
     //ImGui::StyleColorsLight();
 

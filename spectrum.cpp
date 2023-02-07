@@ -17,6 +17,9 @@ namespace ImGui {
         void StyleColorsSpectrum() {
             ImGuiStyle* style = &ImGui::GetStyle();
             style->GrabRounding = 4.0f;
+            style->WindowRounding = 6.0f;
+            style->FrameRounding = 6.0f;
+            style->PopupRounding = 6.0f;
 
             ImVec4* colors = style->Colors;
             colors[ImGuiCol_Text] = ColorConvertU32ToFloat4(Spectrum::GRAY800); // text on hovered controls is gray900
