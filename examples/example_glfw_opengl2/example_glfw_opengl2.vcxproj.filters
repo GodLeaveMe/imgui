@@ -22,17 +22,19 @@
     <ClCompile Include="..\..\imgui_draw.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui_impl_glfw.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui_impl_opengl2.cpp">
-      <Filter>sources</Filter>
+    <ClCompile Include="..\..\imgui_tables.cpp">
+      <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\..\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\..\spectrum.cpp">
       <Filter>imgui</Filter>
+    <ClCompile Include="..\..\backends\imgui_impl_glfw.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\backends\imgui_impl_opengl2.cpp">
+      <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -45,10 +47,10 @@
     <ClInclude Include="..\..\imgui_internal.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="..\imgui_impl_glfw.h">
+    <ClInclude Include="..\..\backends\imgui_impl_glfw.h">
       <Filter>sources</Filter>
     </ClInclude>
-    <ClInclude Include="..\imgui_impl_opengl2.h">
+    <ClInclude Include="..\..\backends\imgui_impl_opengl2.h">
       <Filter>sources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\spectrum.h">
@@ -57,8 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.txt" />
-    <None Include="..\..\misc\natvis\imgui.natvis">
-      <Filter>sources</Filter>
+    <None Include="..\..\misc\debuggers\imgui.natvis">
+      <Filter>imgui</Filter>
     </None>
   </ItemGroup>
 </Project>
