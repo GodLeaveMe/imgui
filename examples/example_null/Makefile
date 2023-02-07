@@ -2,7 +2,7 @@
 # Cross Platform Makefile
 # Compatible with MSYS2/MINGW, Ubuntu 14.04.1 and Mac OS X
 #
-# Important: This is a "null backend" application, with no visible output or interaction!
+# Important: This is a "null back-end" application, with no visible output or interaction!
 # This is used for testing purpose and continuous integration, and has little use for end-user.
 #
 
@@ -11,13 +11,12 @@ WITH_EXTRA_WARNINGS ?= 0
 WITH_FREETYPE ?= 0
 
 EXE = example_null
-IMGUI_DIR = ../..
 SOURCES = main.cpp
-SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
+SOURCES += ../../imgui.cpp ../../imgui_demo.cpp ../../imgui_draw.cpp ../../imgui_widgets.cpp
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 UNAME_S := $(shell uname -s)
 
-CXXFLAGS += -std=c++11 -I$(IMGUI_DIR)
+CXXFLAGS += -I../ -I../../
 CXXFLAGS += -g -Wall -Wformat
 LIBS =
 
@@ -29,7 +28,7 @@ endif
 # We use the WITH_FREETYPE flag on our CI setup to test compiling misc/freetype/imgui_freetype.cpp
 # (only supported on Linux, and note that the imgui_freetype code currently won't be executed)
 ifeq ($(WITH_FREETYPE), 1)
-	SOURCES += $(IMGUI_DIR)/misc/freetype/imgui_freetype.cpp
+	SOURCES += ../../misc/freetype/imgui_freetype.cpp
 	CXXFLAGS += $(shell pkg-config --cflags freetype2)
 	LIBS += $(shell pkg-config --libs freetype2)
 endif
@@ -40,29 +39,25 @@ endif
 
 ifeq ($(UNAME_S), Linux) #LINUX
 	ECHO_MESSAGE = "Linux"
-	ifeq ($(WITH_EXTRA_WARNINGS), 1)
-		CXXFLAGS += -Wextra -Wpedantic
-		ifeq ($(shell $(CXX) -v 2>&1 | grep -c "clang version"), 1)
-			CXXFLAGS += -Wshadow -Wsign-conversion
-		endif
+	ifneq ($(WITH_EXTRA_WARNINGS), 0)
+		CXXFLAGS += -Wextra -pedantic
 	endif
 	CFLAGS = $(CXXFLAGS)
 endif
 
 ifeq ($(UNAME_S), Darwin) #APPLE
 	ECHO_MESSAGE = "Mac OS X"
-	ifeq ($(WITH_EXTRA_WARNINGS), 1)
-		CXXFLAGS += -Weverything -Wno-reserved-id-macro -Wno-c++98-compat-pedantic -Wno-padded -Wno-poison-system-directories
+	ifneq ($(WITH_EXTRA_WARNINGS), 0)
+		CXXFLAGS += -Weverything -Wno-reserved-id-macro -Wno-c++98-compat-pedantic -Wno-padded -Wno-c++11-long-long
 	endif
 	CFLAGS = $(CXXFLAGS)
 endif
 
-ifeq ($(OS), Windows_NT)
+ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
 	ECHO_MESSAGE = "MinGW"
-	ifeq ($(WITH_EXTRA_WARNINGS), 1)
-		CXXFLAGS += -Wextra -Wpedantic
+	ifneq ($(WITH_EXTRA_WARNINGS), 0)
+		CXXFLAGS += -Wextra -pedantic
 	endif
-	LIBS += -limm32
 	CFLAGS = $(CXXFLAGS)
 endif
 
@@ -73,13 +68,13 @@ endif
 %.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(IMGUI_DIR)/%.cpp
+%.o:../%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(IMGUI_DIR)/backends/%.cpp
+%.o:../../%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(IMGUI_DIR)/misc/freetype/%.cpp
+%.o:../../misc/freetype/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all: $(EXE)
